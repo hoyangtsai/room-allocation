@@ -1,7 +1,19 @@
 import { useState, useRef, useEffect } from 'react';
 import styles from './index.module.scss';
 
-const CustomInputNumber = ({min = 0, max = 10, step = 1, name = '', value = 0, disabled = false, onChange, onBlur, className, ...props}) => {
+const CustomInputNumber = ({
+    min = Number.MIN_SAFE_INTEGER,
+    max = Number.MAX_SAFE_INTEGER,
+    step = 1,
+    name = '',
+    value = 0,
+    disabled = false,
+    onChange,
+    onBlur,
+    className,
+    ...props
+  }) => {
+  
   const [inputVal, setInputVal] = useState(value);
   const inputRef = useRef(null);
 
@@ -34,32 +46,48 @@ const CustomInputNumber = ({min = 0, max = 10, step = 1, name = '', value = 0, d
     }
   }
 
-  const emitOnChange = () => {
+  const handleBlur = (e) => {
+    const customEvent = {
+      name, value: inputVal
+    }
+    if (onBlur instanceof Function) {
+      onBlur({ target: customEvent })
+    }
+  }
+
+  useEffect(() => {
     const customEvent = {
       name, value: inputVal
     }
     if (onChange instanceof Function) {
       onChange({ target: customEvent })
     }
-  }
+  }, [inputVal, name])
 
-  const handleBlur = (e) => {
-    emitOnChange();
-  }
 
   useEffect(() => {
-    emitOnChange();
-  }, [inputVal])
+    if (inputVal < min) {
+      setInputVal(min)
+    } else if (inputVal > max) {
+      setInputVal(max)
+    }
+  }, [min, max, inputVal])
+
+  useEffect(() => {
+    setInputVal(value);
+  }, [value])
 
   return (
     <div className={[styles.customInputNumber, className].join(' ')} {...props}>
       <button onClick={handleMinus} disabled={inputVal === min || disabled}>-</button>
       <input type="number"
         ref={inputRef}
-        min={min} max={max}
+        min={min}
+        max={max}
         name={name}
         value={inputVal}
         disabled={disabled}
+        step={step}
         onChange={handleChange}
         onClick={handleClick}
         onBlur={handleBlur}

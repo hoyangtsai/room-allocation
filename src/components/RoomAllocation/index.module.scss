@@ -42,6 +42,11 @@
 
     &__listItemTitle {
         font-size: 16px;
+
+        small {
+            color: rgb(130, 130, 130);
+            font-size: 12px;
+        }
     }
 
     &__listItemInput {
