@@ -8,7 +8,7 @@ module.exports = (env, argv) => {
   return {
     output: {
       path: path.join(__dirname, '/build'),
-      filename: 'index.bundle.[hash:5].js'
+      filename: 'index.bundle.[hash:8].js'
     },
     devServer: {
       port: 3000,
@@ -99,8 +99,8 @@ module.exports = (env, argv) => {
         template: './src/index.html'
       }),
       new MiniCssExtractPlugin({
-        filename: isDevelopment ? '[name].css' : '[name].[hash].css',
-        chunkFilename: isDevelopment ? '[id].css' : '[id].[hash].css'
+        filename: isDevelopment ? '[name].css' : '[name].[hash:8].css',
+        chunkFilename: isDevelopment ? '[id].css' : '[id].[hash:8].css'
       })
     ],
     resolve: {
