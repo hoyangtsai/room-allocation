@@ -1,0 +1,42 @@
+.customInputNumber {
+    display: flex;
+    align-items: center;
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    input {
+        width: 60px;
+        height: 40px;
+        box-sizing: border-box;
+        margin: 0 6px;
+        text-align: center;
+    }
+
+    button {
+        width: 40px;
+        height: 40px;
+        box-sizing: border-box;
+        border: 1px solid rgb(63, 159, 207);
+        background: #fff;
+        border-radius: 4px;
+        color: rgb(63, 159, 207);
+        font-size: 28px;
+        line-height: 38px;
+        cursor: pointer;
+
+        &[disabled] {
+            pointer-events: none;
+            border: 1px solid rgb(155, 208, 230);
+            color: rgb(155, 208, 230);
+        }
+    }
+}
