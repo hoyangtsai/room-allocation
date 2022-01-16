@@ -19,7 +19,7 @@ const CustomInputNumber = ({
 
   const handleChange = (e) => {
     const val = parseInt(e.target.value);
-    if (val && val >= min && val <= max) {
+    if (!isNaN(val) && val >= min && val <= max) {
       setInputVal(val);
     }
   }
@@ -72,10 +72,6 @@ const CustomInputNumber = ({
       setInputVal(max)
     }
   }, [min, max, inputVal])
-
-  useEffect(() => {
-    setInputVal(value);
-  }, [value])
 
   return (
     <div className={[styles.customInputNumber, className].join(' ')} {...props}>

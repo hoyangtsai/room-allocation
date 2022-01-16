@@ -9,8 +9,6 @@ const RoomAllocation = ({guest = 1, room = 1, onChange, ...props}) => {
   const roomCapacity = 4;
 
   useEffect(() => {
-    setTotal(guest);
-
     let consumption = 0;
     let allocateRooms = [];
     for (let i = 0; i < room; i++) {
@@ -23,6 +21,7 @@ const RoomAllocation = ({guest = 1, room = 1, onChange, ...props}) => {
       if (consumption >= guest) break;
     }
     setRooms(allocateRooms);
+    setTotal(guest);
   }, [guest, room]);
 
   const handleInputNumChange = useCallback(({ target }, index) => {
